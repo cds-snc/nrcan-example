@@ -10,12 +10,19 @@ const server = express()
 
 server.use('*', cors({ origin: 'http://localhost:3000' }))
 
-server.use('/graphql', bodyParser.json(), graphqlExpress({ 
-	schema 
-}))
+server.use(
+  '/graphql',
+  bodyParser.json(),
+  graphqlExpress({
+    schema,
+  }),
+)
 
-server.get('/graphiql', graphiqlExpress({ 
-	endpointURL: '/graphql' 
-}))
+server.get(
+  '/graphiql',
+  graphiqlExpress({
+    endpointURL: '/graphql',
+  }),
+)
 
 server.listen(PORT)
