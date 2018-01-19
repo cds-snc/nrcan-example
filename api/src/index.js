@@ -1,28 +1,15 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
-import cors from 'cors'
-import { schema } from './schema'
+import { MongoClient } from 'mongodb'
+import Server from './server'
 
-const PORT = 3001
+const url = 'mongodb://localhost:27017'
 
-const server = express()
-
-server.use('*', cors({ origin: 'http://localhost:3000' }))
-
-server.use(
-  '/graphql',
-  bodyParser.json(),
-  graphqlExpress({
-    schema,
-  }),
-)
-
-server.get(
-  '/graphiql',
-  graphiqlExpress({
-    endpointURL: '/graphql',
-  }),
-)
-
-server.listen(PORT)
+MongoClient.connect(url)
+  .then(async client => {
+    const db = client.db('nrcan_example')
+    const collection = db.collection('buildings')
+    const server = new Server({
+      client: collection,
+    })
+    server.listen(3001)
+  })
+  .catch(console.log)
