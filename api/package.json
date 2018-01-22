@@ -7,8 +7,7 @@
     "start": "node dist/index.js",
     "build": "babel src --copy-files --out-dir dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint src/**",
-    "precommit": "lint-staged"
+    "lint": "eslint src/**"
   },
   "keywords": [],
   "author": "Eva Demers-Brett",
@@ -26,24 +25,8 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.2.1",
     "babel-jest": "^22.1.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "eslint": "^4.15.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-config-standard": "^11.0.0-beta.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jest": "^21.7.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-prettier": "^2.5.0",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "husky": "^0.14.3",
-    "lint-staged": "^6.0.0",
-    "prettier": "^1.10.2"
-  },
-  "lint-staged": {
-    "*": ["prettier --write", "yarn lint", "git add"]
+    "babel-preset-env": "^1.6.1"
   }
 }
