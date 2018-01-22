@@ -16,11 +16,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "precommit": "lint-staged"
-  },
-  "devDependencies": {
-    "lint-staged": "^6.0.1",
-    "prettier": "^1.10.2"
+    "eject": "react-scripts eject"
   }
 }
