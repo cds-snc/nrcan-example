@@ -2,8 +2,17 @@ import { makeExecutableSchema } from 'graphql-tools'
 import resolvers from './resolvers'
 
 const typeDefs = `
+  scalar Longitude
+  scalar Latitude
+
+  input GeoPoint {
+      lat: Latitude!
+      lng: Longitude!
+  }
+  
   type Query {
       evaluationsFor(account: Int!, postalCode: String!): Evaluation
+      evaluations(withinPolygon: [GeoPoint]!): [Evaluation]
     }
     
   type Evaluation {
