@@ -1,20 +1,17 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import DataTable from './components/DataTable'
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Home from './components/Home'
+import Test from './components/Test'
+import Navigation from './components/Navigation'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">NRCAN Example App</h1>
-        </header>
-        <DataTable />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <div>
+      <Navigation />
+      <Route exact path="/" component={Home} />
+      <Route path="/test" component={Test} />
+    </div>
+  </Router>
+)
 
-export default App;
+export default App
