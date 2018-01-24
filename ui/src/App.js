@@ -1,7 +1,7 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './components/Home'
-import Test from './components/Test'
+import Data from './components/Data'
 import Test2 from './components/Test2'
 import Navigation from './components/Navigation'
 
@@ -11,9 +11,12 @@ const App = () => (
   <Router>
     <div>
       <Navigation />
-      <Route exact path="/" component={Home} />
-      <Route path="/test" component={Test} />
-      <Route path="/test2" component={Test2} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/data" component={Data} />
+        <Route path="/test2" component={Test2} />
+        <Route render={() => <h2>Page not found</h2>} />
+      </Switch>
     </div>
   </Router>
 )

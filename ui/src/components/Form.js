@@ -1,19 +1,25 @@
-//lets make a form maybe
-
-//stage 1:
-//enter house id + postal code
-//hit enter
-//display data obtained from graphql
 import React from 'react'
 
-const InputForm = props => {
+const Form = props => {
   return (
-    <form>
+    <form onSubmit={props.onSubmit}>
       <div>
-        <label>Test</label>
+        <label>
+          User ID:&nbsp;
+          <input type="text" name="UID" />
+        </label>
       </div>
-      <div>//postal code</div>
-      <div>//submit button</div>
+      <div>
+        <label>
+          Postal Code:&nbsp;
+          <input type="text" name="PCode" />
+        </label>
+      </div>
+      <div>
+        <input type="submit" value="submit" />
+      </div>
     </form>
   )
 }
+
+export default Form

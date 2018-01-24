@@ -9,3 +9,7 @@ a, a:visited {
 a.active {
   color: red;
 }
+
+form div {
+  margin-top: 10px;
+}
