@@ -7,8 +7,9 @@ class Home extends React.Component {
   constructor() {
     super()
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.handleResetClick = this.handleResetClick.bind(this)
     this.state = {
-      data: false,
+      data: true,
     }
   }
 
@@ -33,13 +34,22 @@ class Home extends React.Component {
     this.setState({ data: response.data.evaluationsFor })
   }
 
+  handleResetClick() {
+    this.setState({ data: false })
+  }
+
   render() {
     if (!this.state.data) return <Form onSubmit={this.handleFormSubmit} />
     else
       return (
         <div>
+          <br />
+          <br />
           <strong>year built:</strong>
           {this.state.data.yearBuilt}
+          <br />
+          <br />
+          <button onClick={this.handleResetClick}>Reset data</button>
         </div>
       )
   }
