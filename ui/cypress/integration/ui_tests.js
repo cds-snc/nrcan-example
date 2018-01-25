@@ -1,11 +1,17 @@
-describe('NRCAN - example app', function() {
-  describe('Basic Tests', function() {
-    it('Should pass, we hope', function() {
+describe('NRCAN - example app', () => {
+  beforeEach(() => {
+    cy.visit('/')
+  })
+
+  describe('Basic Test', () => {
+    it('Asserts true', () => {
       expect(true).to.equal(true)
     })
+  })
 
-    it('Should visit the page', function() {
-      cy.visit('/')
+  describe('Input form', () => {
+    it('Focuses input on load', () => {
+      cy.focused().should('have.class', 'UID-input')
     })
   })
 })

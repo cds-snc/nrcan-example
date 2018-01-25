@@ -6,7 +6,7 @@ const Form = props => {
       <div>
         <label>
           User ID:&nbsp;
-          <input type="text" name="UID" />
+          <input type="text" autoFocus name="UID" className="UID-input" />
         </label>
       </div>
       <div>
