@@ -1,4 +1,5 @@
 import React from 'react'
+import { withApollo } from 'react-apollo'
 
 const Data = () => {
   return (
@@ -8,4 +9,4 @@ const Data = () => {
   )
 }
 
-export default Data
+export default withApollo(Data)
