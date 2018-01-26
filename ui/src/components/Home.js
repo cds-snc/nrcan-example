@@ -9,12 +9,13 @@ class Home extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleResetClick = this.handleResetClick.bind(this)
     this.state = {
-      data: true,
+      data: false,
     }
   }
 
   async handleFormSubmit(event) {
     event.preventDefault()
+
     let { client } = this.props
 
     let response = await client.query({
@@ -45,8 +46,10 @@ class Home extends React.Component {
         <div>
           <br />
           <br />
-          <strong>year built:</strong>
-          {this.state.data.yearBuilt}
+          <div>
+            <strong>year built:</strong>
+          </div>
+          <div className="yearBuilt">{this.state.data.yearBuilt}</div>
           <br />
           <br />
           <button onClick={this.handleResetClick}>Reset data</button>
