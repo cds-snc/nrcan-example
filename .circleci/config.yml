@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  api:
+  build:
     docker:
       # specify the version you desire here
       - image: circleci/node:7.10
@@ -12,8 +12,9 @@ jobs:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
+      
 
-    working_directory: ~/repo/api
+    working_directory: ~/repo/ui
 
     steps:
       - checkout
@@ -33,17 +34,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run server in background
-      - run: 
-          command: yarn start
-          background: true
-
-      -run:
-        shell: /bin/sh
-        command: |
-          wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:3001/graphql
-          :
-
-      -run:
-        command: echo huzzah
-
-
+      - run: yarn test
