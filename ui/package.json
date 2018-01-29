@@ -17,15 +17,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "echo huzzah",
-    "eject": "react-scripts eject",
-    "cypress:open": "cypress open",
-    "test-multiple": "cypress run --reporter mocha-multi-reporters --reporter-options configFile=config.json"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "cypress": "^1.4.1",
-    "mocha": "^5.0.0",
-    "mocha-junit-reporter": "^1.17.0",
-    "mocha-multi-reporters": "^1.1.7"
+    "enzyme": "^3.3.0"
   }
 }
