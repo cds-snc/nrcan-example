@@ -8,9 +8,16 @@ class Home extends React.Component {
     super()
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleResetClick = this.handleResetClick.bind(this)
+    this.handleFormChange = this.handleFormChange.bind(this)
+
     this.state = {
       data: false,
+      value: '',
     }
+  }
+
+  handleFormChange(event) {
+    console.log(event.target.value)
   }
 
   async handleFormSubmit(event) {
@@ -36,11 +43,21 @@ class Home extends React.Component {
   }
 
   handleResetClick() {
-    this.setState({ data: false })
+    this.state = {
+      data: false,
+      UID_value: '',
+      PCode_value: '',
+    }
   }
 
   render() {
-    if (!this.state.data) return <Form onSubmit={this.handleFormSubmit} />
+    if (!this.state.data)
+      return (
+        <Form
+          onSubmit={this.handleFormSubmit}
+          onChange={this.handleFormChange}
+        />
+      )
     else
       return (
         <div>

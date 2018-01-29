@@ -6,7 +6,13 @@ const Form = props => {
       <div>
         <label>
           User ID:&nbsp;
-          <input type="text" autoFocus name="UID" className="UID-input" />
+          <input
+            type="text"
+            autoFocus
+            name="UID"
+            className="UID-input"
+            onChange={props.onChange}
+          />
         </label>
       </div>
       <div>
