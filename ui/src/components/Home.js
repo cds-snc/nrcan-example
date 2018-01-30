@@ -8,9 +8,23 @@ class Home extends React.Component {
     super()
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleResetClick = this.handleResetClick.bind(this)
+    this.handleFormChange = this.handleFormChange.bind(this)
+
     this.state = {
       data: false,
+      UID: null,
+      PCODE: null,
     }
+  }
+
+  handleFormChange(event) {
+    const target = event.target
+    const value = target.value
+    const name = target.name
+
+    this.setState({
+      [name]: value,
+    })
   }
 
   async handleFormSubmit(event) {
@@ -20,15 +34,15 @@ class Home extends React.Component {
 
     let response = await client.query({
       query: gql`
-        query evaluationQuery($UID: Int!, $PCode: String!) {
-          evaluationsFor(account: $UID, postalCode: $PCode) {
+        query evaluationQuery($UID: Int!, $PCODE: String!) {
+          evaluationsFor(account: $UID, postalCode: $PCODE) {
             yearBuilt
           }
         }
       `,
       variables: {
-        UID: event.target.elements.UID.value,
-        PCode: event.target.elements.PCode.value,
+        UID: this.state.UID,
+        PCODE: this.state.PCODE,
       },
     })
 
@@ -36,11 +50,21 @@ class Home extends React.Component {
   }
 
   handleResetClick() {
-    this.setState({ data: false })
+    this.setState({
+      data: false,
+      UID: null,
+      PCODE: null,
+    })
   }
 
   render() {
-    if (!this.state.data) return <Form onSubmit={this.handleFormSubmit} />
+    if (!this.state.data)
+      return (
+        <Form
+          onSubmit={this.handleFormSubmit}
+          onChange={this.handleFormChange}
+        />
+      )
     else
       return (
         <div>

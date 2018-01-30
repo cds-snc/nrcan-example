@@ -22,5 +22,8 @@
   },
   "devDependencies": {
     "enzyme": "^3.3.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }
