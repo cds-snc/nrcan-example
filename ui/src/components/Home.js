@@ -12,12 +12,19 @@ class Home extends React.Component {
 
     this.state = {
       data: false,
-      value: '',
+      UID: null,
+      PCODE: null,
     }
   }
 
   handleFormChange(event) {
-    console.log(event.target.value)
+    const target = event.target
+    const value = target.value
+    const name = target.name
+
+    this.setState({
+      [name]: value,
+    })
   }
 
   async handleFormSubmit(event) {
@@ -27,15 +34,15 @@ class Home extends React.Component {
 
     let response = await client.query({
       query: gql`
-        query evaluationQuery($UID: Int!, $PCode: String!) {
-          evaluationsFor(account: $UID, postalCode: $PCode) {
+        query evaluationQuery($UID: Int!, $PCODE: String!) {
+          evaluationsFor(account: $UID, postalCode: $PCODE) {
             yearBuilt
           }
         }
       `,
       variables: {
-        UID: event.target.elements.UID.value,
-        PCode: event.target.elements.PCode.value,
+        UID: this.state.UID,
+        PCODE: this.state.PCODE,
       },
     })
 
@@ -43,11 +50,11 @@ class Home extends React.Component {
   }
 
   handleResetClick() {
-    this.state = {
+    this.setState({
       data: false,
-      UID_value: '',
-      PCode_value: '',
-    }
+      UID: null,
+      PCODE: null,
+    })
   }
 
   render() {
