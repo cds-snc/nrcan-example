@@ -6,8 +6,7 @@ import Data from './Data'
 const DataPage = ({ data: { clientData } }) => {
   return (
     <div>
-      {/*}<Data clientUID={clientData.UID} clientPCODE={clientData.PCODE} />*/}
-      <Data UID={clientData.UID} />
+      <Data clientUID={clientData.UID} clientPCODE={clientData.PCODE} />
     </div>
   )
 }

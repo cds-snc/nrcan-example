@@ -1,52 +1,44 @@
 import React from 'react'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const Data = props => {
-  console.log(props)
-  //add some loading stuff here because otherwise no bueno
-  //going to try and see if I can grab UID & PCODE from local state
+  const { evaluationData: { evaluationsFor } } = props
+
+  if (!evaluationsFor) {
+    return null
+  }
+
   return (
     <div>
       <h2>Data</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <h3>Year Built</h3>
+            </td>
+            <td>
+              <h3>Energuide rating</h3>
+            </td>
+          </tr>
+          <tr>
+            <td>{evaluationsFor.yearBuilt}</td>
+            <td>{evaluationsFor.eghrating}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
 
 const EvaluationQuery = gql`
-  query EvaluationQuery($UID: Int!) {
-    evaluationsFor(account: $UID, postalCode: "M8H 1N1") {
+  query EvaluationQuery($clientUID: Int!, $clientPCODE: PostalCode!) {
+    evaluationsFor(account: $clientUID, postalCode: $clientPCODE) {
       yearBuilt
+      eghrating
     }
   }
 `
 
-const clientDataQuery = gql`
-  query clientDataQuery {
-    clientData @client {
-      UID
-      PCODE
-    }
-  }
-`
-
-//export default compose(graphql(EvaluationQuery), graphql(clientDataQuery))(Data)
-//export default graphql(clientDataQuery)(Data)
-
-//export default graphql(EvaluationQuery, { name: 'EvaluationQuery' })(Data)
-export default graphql(EvaluationQuery, {
-  options: ({ UID }) => ({ variables: { UID } }),
-})(Data)
-
-/*const EvaluationQuery = gql`
-  query EvaluationQuery($UID: Int!, $PCODE: PostalCode!) {
-    evaluationsFor(account: $UID, postalCode: $PCODE) {
-      yearBuilt
-    }
-  }
-`
-export default graphql(EvaluationQuery, {
-  options: { variables: { UID: 761266, PCODE: 'M8H 1N1' } },
-})(Data)*/
-
-//export default graphql(EvaluationQuery, { name: 'EvaluationQuery' })(Data)
+export default graphql(EvaluationQuery, { name: 'evaluationData' })(Data)
