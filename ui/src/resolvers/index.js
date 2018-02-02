@@ -1,15 +1,37 @@
 export const defaults = {
-  clientData: {
-    __typename: 'clientData',
-    UID: 761266,
-    PCODE: 'M8H 1N1',
+  clientUID: {
+    __typename: 'ClientUID',
+    UID: '',
+  },
+  clientPCODE: {
+    __typename: 'ClientPCODE',
+    PCODE: '',
   },
 }
 
 export const resolvers = {
   Mutation: {
-    setClientData: (_, { uid, pcode }, { cache }) => {
-      cache.writeData({ clientData: { UID: uid, PCODE: pcode } })
+    setClientUID: (_, { UID }, { cache }) => {
+      cache.writeData({
+        data: {
+          clientUID: {
+            __typename: 'ClientUID',
+            UID: UID,
+          },
+        },
+      })
+      return null
+    },
+    setClientPCODE: (_, { PCODE }, { cache }) => {
+      cache.writeData({
+        data: {
+          clientPCODE: {
+            __typename: 'ClientPCODE',
+            PCODE: PCODE,
+          },
+        },
+      })
+      return null
     },
   },
 }
