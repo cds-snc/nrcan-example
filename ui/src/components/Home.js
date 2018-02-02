@@ -1,18 +1,14 @@
 import React from 'react'
 import Form from './Form'
 import gql from 'graphql-tag'
+import { graphql, compose } from 'react-apollo'
 
 class Home extends React.Component {
-  constructor() {
-    super()
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
-    this.handleResetClick = this.handleResetClick.bind(this)
-    this.handleFormChange = this.handleFormChange.bind(this)
+  constructor(props) {
+    super(props)
 
-    this.state = {
-      UID: null,
-      PCODE: null,
-    }
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.handleFormChange = this.handleFormChange.bind(this)
   }
 
   handleFormChange(event) {
@@ -20,30 +16,64 @@ class Home extends React.Component {
     const value = target.value
     const name = target.name
 
-    this.setState({
-      [name]: value,
-    })
+    name === 'UID'
+      ? this.props.submitClientUID(value)
+      : this.props.submitClientPCODE(value)
   }
 
+  //this is going to redirect to the data DataPage
+  //Validation for form input can also go here before redirect
   async handleFormSubmit(event) {
     event.preventDefault()
-
-    //fire mutation to store UID & PCODE in local state
-  }
-
-  handleResetClick() {
-    //this is probably getting removed?
-    this.setState({
-      UID: null,
-      PCODE: null,
-    })
+    console.log('UID: ', this.props.data.clientUID.UID)
+    console.log('PCODE: ', this.props.data.clientPCODE.PCODE)
   }
 
   render() {
     return (
-      <Form onSubmit={this.handleFormSubmit} onChange={this.handleFormChange} />
+      <Form
+        onSubmit={this.handleFormSubmit}
+        onChange={this.handleFormChange}
+        uidValue={this.props.data.clientUID.UID}
+        pcodeValue={this.props.data.clientPCODE.PCODE}
+      />
     )
   }
 }
 
-export default Home
+const setClientUID = gql`
+  mutation setClientUID($UID: Int!) {
+    setClientUID(UID: $UID) @client
+  }
+`
+
+const setClientPCODE = gql`
+  mutation setClientPCODE($PCODE: String!) {
+    setClientPCODE(PCODE: $PCODE) @client
+  }
+`
+
+const clientDataQuery = gql`
+  query clientDataQuery {
+    clientUID @client {
+      UID
+    }
+    clientPCODE @client {
+      PCODE
+    }
+  }
+`
+
+export default compose(
+  graphql(setClientPCODE, {
+    props: ({ mutate }) => ({
+      submitClientPCODE: PCODE => mutate({ variables: { PCODE } }),
+    }),
+  }),
+  graphql(setClientUID, {
+    props: ({ mutate }) => ({
+      submitClientUID: UID => mutate({ variables: { UID } }),
+    }),
+  }),
+  graphql(clientDataQuery),
+)(Home)

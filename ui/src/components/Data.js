@@ -5,9 +5,7 @@ import gql from 'graphql-tag'
 const Data = props => {
   const { evaluationData: { evaluationsFor } } = props
 
-  if (!evaluationsFor) {
-    return null
-  }
+  if (props.evaluationData.loading) return <div>Data is loading</div>
 
   return (
     <div>
