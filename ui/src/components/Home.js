@@ -25,8 +25,8 @@ class Home extends React.Component {
   //Validation for form input can also go here before redirect
   async handleFormSubmit(event) {
     event.preventDefault()
-    console.log('UID: ', this.props.data.clientUID.UID)
-    console.log('PCODE: ', this.props.data.clientPCODE.PCODE)
+    console.log('UID: ', this.props.UID)
+    console.log('PCODE: ', this.props.PCODE)
   }
 
   render() {
@@ -34,8 +34,8 @@ class Home extends React.Component {
       <Form
         onSubmit={this.handleFormSubmit}
         onChange={this.handleFormChange}
-        uidValue={this.props.data.clientUID.UID}
-        pcodeValue={this.props.data.clientPCODE.PCODE}
+        uidValue={this.props.UID}
+        pcodeValue={this.props.PCODE}
       />
     )
   }
@@ -75,5 +75,10 @@ export default compose(
       submitClientUID: UID => mutate({ variables: { UID } }),
     }),
   }),
-  graphql(clientDataQuery),
+  graphql(clientDataQuery, {
+    props: ({ data: { clientUID, clientPCODE } }) => ({
+      UID: clientUID.UID,
+      PCODE: clientPCODE.PCODE,
+    }),
+  }),
 )(Home)
