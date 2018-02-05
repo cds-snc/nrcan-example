@@ -1,6 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Form = props => {
+  Form.propTypes = {
+    onSubmit: PropTypes.func,
+    onChange: PropTypes.func,
+    uidValue: PropTypes.string,
+    pcodeValue: PropTypes.string,
+  }
+
   return (
     <form onSubmit={props.onSubmit}>
       <div>

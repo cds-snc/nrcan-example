@@ -2,6 +2,7 @@ import React from 'react'
 import Form from './Form'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
+import PropTypes from 'prop-types'
 
 class Home extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class Home extends React.Component {
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleFormChange = this.handleFormChange.bind(this)
+    console.log(props)
   }
 
   handleFormChange(event) {
@@ -39,6 +41,13 @@ class Home extends React.Component {
       />
     )
   }
+}
+
+Home.propTypes = {
+  PCODE: PropTypes.string,
+  UID: PropTypes.string,
+  submitClientUID: PropTypes.func,
+  submitClientPCODE: PropTypes.func,
 }
 
 const setClientUID = gql`
