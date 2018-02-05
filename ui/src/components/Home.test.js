@@ -1,20 +1,31 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import { Home } from './Home'
+import Form from './Form'
 
-//boilerplate
 describe('Home Component', () => {
-  //Div is always rendered
+  let HomeComponent = shallow(<Home />)
   it('Should always render a div', () => {
-    const wrapper = shallow(<Home />)
-    expect(wrapper.find('div').length).toBeGreaterThan(0)
+    expect(HomeComponent.find('div').length).toBeGreaterThan(0)
   })
-  //Div contains everything else that is rendered
-  it('Should be contained within a div', () => {})
-  //A form is always rendered
+  describe('The rendered div', () => {
+    it('Should contain everything else that gets rendered', () => {
+      const divs = HomeComponent.find('div')
+      const wrappingDiv = divs.first()
+
+      expect(wrappingDiv.children()).toEqual(HomeComponent.children())
+    })
+  })
+  it('Should always render a form', () => {
+    expect(HomeComponent.find('Form').length).toEqual(1)
+  })
+  describe('Rendered form', () => {
+    it('Should accept four props', () => {
+      const form = HomeComponent.find(Form)
+      expect(Object.keys(form.props()).length).toBe(4)
+    })
+  })
   //Form accepts 4 props
-  //Form UID value is equal to prop uidValue
-  //Form PCODE value is equal to prop pcodeValue
   //Clicking the submit button calls onSubmit function
-  //Typing input calls the onChange function
+  //Typing input calls the correct onChange function
 })
