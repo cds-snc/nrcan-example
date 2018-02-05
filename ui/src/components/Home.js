@@ -4,13 +4,12 @@ import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import PropTypes from 'prop-types'
 
-class Home extends React.Component {
+export class Home extends React.Component {
   constructor(props) {
-    super(props)
+    super()
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleFormChange = this.handleFormChange.bind(this)
-    console.log(props)
   }
 
   handleFormChange(event) {
@@ -33,12 +32,15 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Form
-        onSubmit={this.handleFormSubmit}
-        onChange={this.handleFormChange}
-        uidValue={this.props.UID}
-        pcodeValue={this.props.PCODE}
-      />
+      <div>
+        <h2>Title of page</h2>
+        <Form
+          onSubmit={this.handleFormSubmit}
+          onChange={this.handleFormChange}
+          uidValue={this.props.UID}
+          pcodeValue={this.props.PCODE}
+        />
+      </div>
     )
   }
 }
