@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 const Form = props => {
   Form.propTypes = {
-    onSubmit: PropTypes.func,
-    onChange: PropTypes.func,
-    uidValue: PropTypes.string,
-    pcodeValue: PropTypes.string,
+    onSubmit: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    uidValue: PropTypes.string.isRequired,
+    pcodeValue: PropTypes.string.isRequired,
   }
 
   return (
