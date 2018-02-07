@@ -3,6 +3,7 @@ import Form from './Form'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import PropTypes from 'prop-types'
+import DataPage from './DataPage'
 
 export class Home extends React.Component {
   constructor(props) {
@@ -10,6 +11,9 @@ export class Home extends React.Component {
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleFormChange = this.handleFormChange.bind(this)
+    this.state = {
+      hasData: false,
+    }
   }
 
   handleFormChange(event) {
@@ -28,9 +32,17 @@ export class Home extends React.Component {
     event.preventDefault()
     console.log('UID: ', this.props.UID)
     console.log('PCODE: ', this.props.PCODE)
+
+    this.setState({ hasData: true })
   }
 
   render() {
+    if (this.state.hasData)
+      return (
+        <div>
+          <DataPage />
+        </div>
+      )
     return (
       <div>
         <h2>Title of page</h2>
