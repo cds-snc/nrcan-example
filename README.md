@@ -1,4 +1,4 @@
-# ✨ NRCAN Example ✨
+# NRCAN Example
 
 [![CircleCI](https://circleci.com/gh/cds-snc/nrcan-example/tree/master.svg?style=svg)](https://circleci.com/gh/cds-snc/nrcan-example/tree/master) . \* ･ ｡ﾟ☆━੧༼ •́ ヮ •̀ ༽୨
 
@@ -6,7 +6,7 @@ This is a small recipe/example for using React & Apollo Client to display data f
 
 This project is currently on hold and will not be kept up to date with changes to the API, so actual data fetching will likely not work.
 
-## Running the example
+## Running the things
 
 You can install & run the example with the following commands:
 
